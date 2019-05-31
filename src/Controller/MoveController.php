@@ -24,13 +24,15 @@ class MoveController extends Controller
 	{
 
 		/* check if there is a token down this token */
-		$index = $move + 7;
-		if( $move > 34 ){
-			$this->auth = true;
-		}else{
-			if( $grid[$index] !== false ){
-				$this->auth = true;	
-			}
+		if( $grid[$move] === false ){
+			$index = $move + 7;
+			if( $move > 34 ){
+				$this->auth = true;
+			}else{
+				if( $grid[$index] !== false ){
+					$this->auth = true;	
+				}
+			}			
 		}
 
 		return $this;
@@ -128,8 +130,8 @@ class MoveController extends Controller
 	{
 		$winn = false;
 		foreach($tokens as $key => $token){
-			if( isset($tokens[$key+8]) && isset($tokens[$key+15]) && isset($tokens[$key+22]) ){
-				if( ($tokens[$key+8] === true) && ($tokens[$key+15] === true) && ($tokens[$key+22] === true) ){
+			if( isset($tokens[$key+8]) && isset($tokens[$key+16]) && isset($tokens[$key+24]) ){
+				if( ($tokens[$key+8] === true) && ($tokens[$key+16] === true) && ($tokens[$key+24] === true) ){
 					$winn = true;		
 				}				
 			}
@@ -140,13 +142,12 @@ class MoveController extends Controller
 		}
 
 		foreach($tokens as $key => $token){
-			if( isset($tokens[$key+6]) && isset($tokens[$key+13]) && isset($tokens[$key+20]) ){
-				if( ($tokens[$key+6] === true) && ($tokens[$key+13] === true) && ($tokens[$key+20] === true) ){
+			if( isset($tokens[$key+6]) && isset($tokens[$key+12]) && isset($tokens[$key+18]) ){
+				if( ($tokens[$key+6] === true) && ($tokens[$key+12] === true) && ($tokens[$key+18] === true) ){
 					$winn = true;		
 				}				
 			}
 		}
-
 		return $winn;		
 	}
 
