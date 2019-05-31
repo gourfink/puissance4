@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Controller;
-use Symfony\Component\HttpFoundation\RequestStack;
 
-class MoveController
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RequestStack;
+use App\Entity\Grid;
+
+class MoveController extends Controller
 {
 	public $auth;
 	public $winn;
@@ -13,13 +16,18 @@ class MoveController
 	*/
 	public function __construct(RequestStack $request)
 	{
+		$grid = new Grid;
+
 		$query = $request->getCurrentRequest();
+
 		$player = $query->query->get('p');
 		$move = $query->query->get('m');
 		
 		$this->is_authorized($player,$move);
 
 		$this->is_winning($player,$move);
+
+		$grid->setState(json_encode([$move => $player]));
 
 		return $this;
 	}
