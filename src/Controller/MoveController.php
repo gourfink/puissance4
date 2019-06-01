@@ -12,9 +12,6 @@ class MoveController extends Controller
 	public $auth = false;
 	public $winn = false;
 
-	/**
-	
-	*/
 	public function __construct(RequestStack $request)
 	{
 		return $this;
